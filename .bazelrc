@@ -1,0 +1,3 @@
+
+# show logs
+test --test_output=errors
