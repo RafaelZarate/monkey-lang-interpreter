@@ -32,6 +32,8 @@ const (
 	LT
 	// GT represents the greater than operator.
 	GT
+	EQ
+	NOT_EQ
 
 	// COMMA represents the literal comma symbol ,.
 	COMMA
@@ -51,6 +53,11 @@ const (
 	FUNCTION
 	// LET is the keyword for a variable declaration.
 	LET
+	TRUE
+	FALSE
+	IF
+	ELSE
+	RETURN
 )
 
 // Token represents a parsed token.
@@ -72,6 +79,16 @@ func LookupIdentifier(ident string) TokenType {
 		tok = FUNCTION
 	case "let":
 		tok = LET
+	case "true":
+		tok = TRUE
+	case "false":
+		tok = FALSE
+	case "if":
+		tok = IF
+	case "else":
+		tok = ELSE
+	case "return":
+		tok = RETURN
 	default:
 		tok = IDENT
 	}
@@ -122,6 +139,20 @@ func TokenTypeString(tokenType TokenType) string {
 		s = "FUNCTION"
 	case LET:
 		s = "LET"
+	case TRUE:
+		s = "TRUE"
+	case FALSE:
+		s = "FALSE"
+	case IF:
+		s = "IF"
+	case ELSE:
+		s = "ELSE"
+	case RETURN:
+		s = "RETURN"
+	case EQ:
+		s = "EQ"
+	case NOT_EQ:
+		s = "NOT_EQ"
 	}
 	return s
 }

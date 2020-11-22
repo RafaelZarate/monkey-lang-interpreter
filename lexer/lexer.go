@@ -30,13 +30,25 @@ func (l *StringLexer) NextToken() token.Token {
 
 	switch l.ch {
 	case '=':
-		tok = token.NewToken(token.ASSIGN, string(l.ch))
+		if l.peekChar() == '=' {
+			ch := l.ch
+			l.readChar()
+			tok = token.NewToken(token.EQ, string(ch)+string(l.ch))
+		} else {
+			tok = token.NewToken(token.ASSIGN, string(l.ch))
+		}
 	case '+':
 		tok = token.NewToken(token.PLUS, string(l.ch))
 	case '-':
 		tok = token.NewToken(token.MINUS, string(l.ch))
 	case '!':
-		tok = token.NewToken(token.BANG, string(l.ch))
+		if l.peekChar() == '=' {
+			ch := l.ch
+			l.readChar()
+			tok = token.NewToken(token.NOT_EQ, string(ch)+string(l.ch))
+		} else {
+			tok = token.NewToken(token.BANG, string(l.ch))
+		}
 	case '/':
 		tok = token.NewToken(token.SLASH, string(l.ch))
 	case '*':
@@ -75,6 +87,14 @@ func (l *StringLexer) NextToken() token.Token {
 
 	l.readChar()
 	return tok
+}
+
+func (l *StringLexer) peekChar() byte {
+	if l.readPosition >= len(l.input) {
+		return 0
+	} else {
+		return l.input[l.readPosition]
+	}
 }
 
 func (l *StringLexer) readChar() {
