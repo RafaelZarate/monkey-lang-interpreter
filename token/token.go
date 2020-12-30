@@ -60,6 +60,67 @@ const (
 	RETURN
 )
 
+func (tt TokenType) String() string {
+	switch tt {
+	case ILLEGAL:
+		return "ILLEGAL"
+	case EOF:
+		return "EOF"
+	case IDENT:
+		return "IDENT"
+	case INT:
+		return "INT"
+	case ASSIGN:
+		return "ASSIGN"
+	case PLUS:
+		return "PLUS"
+	case MINUS:
+		return "MINUS"
+	case BANG:
+		return "BANG"
+	case ASTERISK:
+		return "ASTERISK"
+	case SLASH:
+		return "SLASH"
+	case LT:
+		return "LT"
+	case GT:
+		return "GT"
+	case COMMA:
+		return "COMMA"
+	case SEMICOLON:
+		return "SEMICOLON"
+	case LPAREN:
+		return "LPAREN"
+	case RPAREN:
+		return "RPAREN"
+	case LBRACE:
+		return "LBRACE"
+	case RBRACE:
+		return "RBRACE"
+	case FUNCTION:
+		return "FUNCTION"
+	case LET:
+		return "LET"
+	case TRUE:
+		return "TRUE"
+	case FALSE:
+		return "FALSE"
+	case IF:
+		return "IF"
+	case ELSE:
+		return "ELSE"
+	case RETURN:
+		return "RETURN"
+	case EQ:
+		return "EQ"
+	case NOT_EQ:
+		return "NOT_EQ"
+	default:
+		return "UNKNOWN"
+	}
+}
+
 // Token represents a parsed token.
 type Token struct {
 	Type    TokenType

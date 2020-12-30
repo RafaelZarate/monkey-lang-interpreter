@@ -110,7 +110,7 @@ if (5 < 10) {
 	for i, tt := range tests {
 		tok := l.NextToken()
 		if tok.Type != tt.expectedType {
-			t.Fatalf("tests[%d] - tokentype wrong. want=%v (%s), got=%v (%s)", i, tt.expectedType, token.TokenTypeString(tt.expectedType), tok.Type, token.TokenTypeString(tok.Type))
+			t.Fatalf("tests[%d] - tokentype wrong. want=%v (%s), got=%v (%s)", i, tt.expectedType, tt.expectedType, tok.Type, tok.Type)
 		}
 		if tok.Literal != tt.expectedLiteral {
 			t.Fatalf("tests[%d] - literal wrong. expected=%v, got=%v", i, tt.expectedLiteral, tok.Literal)
