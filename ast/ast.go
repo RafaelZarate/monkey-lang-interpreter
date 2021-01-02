@@ -45,24 +45,72 @@ func (p *Program) String() string {
 	return out.String()
 }
 
-type Indentifier struct {
+type Identifier struct {
 	Token token.Token
 	Value string
 }
 
-func (i *Indentifier) expressionNode() {}
+func (i *Identifier) expressionNode() {}
 
-func (i *Indentifier) TokenLiteral() string {
+func (i *Identifier) TokenLiteral() string {
 	return i.Token.Literal
 }
 
-func (i *Indentifier) String() string {
+func (i *Identifier) String() string {
 	return i.Value
+}
+
+type IntegerLiteral struct {
+	Token token.Token
+	Value int64
+}
+
+func (il *IntegerLiteral) expressionNode() {}
+
+func (il *IntegerLiteral) TokenLiteral() string {
+	return il.Token.Literal
+}
+
+func (il *IntegerLiteral) String() string {
+	return il.Token.Literal
+}
+
+type PrefixExpression struct {
+	Token    token.Token
+	Operator string
+	Right    Expression
+}
+
+func (pe *PrefixExpression) expressionNode() {}
+
+func (pe *PrefixExpression) TokenLiteral() string {
+	return pe.Token.Literal
+}
+
+func (pe *PrefixExpression) String() string {
+	return fmt.Sprintf("(%s%s)", pe.Operator, pe.Right.String())
+}
+
+type InfixExpression struct {
+	Token    token.Token
+	Left     Expression
+	Operator string
+	Right    Expression
+}
+
+func (ie *InfixExpression) expressionNode() {}
+
+func (ie *InfixExpression) TokenLiteral() string {
+	return ie.Token.Literal
+}
+
+func (ie *InfixExpression) String() string {
+	return fmt.Sprintf("(%s %s %s)", ie.Left.String(), ie.Operator, ie.Right.String())
 }
 
 type LetStatement struct {
 	Token token.Token
-	Name  *Indentifier
+	Name  *Identifier
 	Value Expression
 }
 
